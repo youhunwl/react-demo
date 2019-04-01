@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>ref</title>
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <!-- 由于react、vue这类框架的组件都不是真实的DOM节点，而是存在于内存中的一中数据结构，叫做虚拟DOM( virtual DOM ) ，只有当他插入文档以后，才会变成真实的DOM 
+
+    注意：单标签一定要闭合，否则报错
+    -->
+    <div id="root"></div>
+    <script type="text/babel">
+      class MyComponent extends React.Component{
+        constructor(props){
+          super(props)
+          this.myTextInput = React.createRef()
+          this.handlerClick = this.handlerClick.bind(this)
+        }
+        handlerClick(){
+          this.myTextInput.current.focus()
+        }
+        //挂载之后的钩子
+        componentDidMount(){
+          this.handlerClick()
+        }
+        render(){
+          return (
+            <div>
+              <input type="text" ref={this.myTextInput} />
+              <input type="button" value="输入框获取焦点" onClick={this.handlerClick} />
+            </div>
+          )
+        }
+      }
+      ReactDOM.render(
+        <MyComponent />,
+        document.getElementById('root')
+      )
+    </script>
+  </body>
+</html>

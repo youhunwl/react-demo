@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>组件和props</title>
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <!-- 定义一个组件最简单的方式是使用JavaScript函数 
+      也可以使用 Es6 class来定义一个组件
+      组件只能包含一个顶层标签
+      组件首字母必须大写
+      添加组件属性需要注意：class 写成 className for写成htmlFor,因为class和for是js的保留字
+
+      props：一旦定义，不再改变 
+
+      函数组件使用：props.[propName] 读取props
+      类组件使用：this.props.[propName] 读取props
+    -->
+    <div id="root"></div>
+    <script type="text/babel">
+      //函数式组件
+      function Hello(props){
+        return <h1>Hello,{props.name}</h1> 
+      }
+      // 类组件
+      class Welcome extends React.Component{
+        render(){
+          return <h2>Welcome,{this.props.name}</h2>
+        }
+      }
+      ReactDOM.render(
+        <Hello name='游魂'></Hello>,
+        //<Welcome name='游魂'/>,
+        document.getElementById('root')
+      )
+    </script>
+  </body>
+</html>

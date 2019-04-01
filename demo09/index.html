@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>表单</title>
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <!-- 用户在表单输入的内容，属于用户跟组件的互动，所以不能使用this.props读取，
+    应该使用this.state,例如下面的例子输入框的 value 不能使用 this.props.value，而是利用回调函数的方法，通过e.target.value读取用户输入的值，
+    textarea、select、radio元素都属于这种情况
+     -->
+    <div id="root"></div>
+    <script type="text/babel">
+      class Input extends React.Component{
+        constructor(props){
+          super(props)
+          this.state = {
+            value:'Hello'
+          }
+          this.handlerChange = this.handlerChange.bind(this)
+        }
+        handlerChange(e){
+          this.setState({
+            value:e.target.value
+          })
+        }
+        render(){
+          const value = this.state.value
+          return (
+            <div>
+              <input type="text" value={value} onChange={this.handlerChange} />
+              <p>{value}</p>
+            </div>
+          )
+        }
+      }
+      ReactDOM.render(
+        <Input />,
+        document.getElementById('root')
+      )
+    </script>
+  </body>
+</html>

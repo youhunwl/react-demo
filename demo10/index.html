@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>组件的声明周期</title>
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <!-- 
+      注意：组件的style 不能写成 style="opacity:{this.state.opacity}" 
+            应该写成 style="{{opacity:this.state.opacity}}"
+
+            因为React组件样式是一个对象 第一个{}表示这个是js语法，第二个{}表示样式对象
+     -->
+    <div id="root"></div>
+    <script type="text/babel">
+      class Hello extends React.Component{
+        constructor(props){
+          super(props)
+          this.state = {opacity:1.0}
+        }
+        // 组件渲染之后调用
+        componentDidMount(){
+          this.timer = setInterval(() => {
+            let opacity = this.state.opacity
+            opacity -= 0.05
+            if(opacity < 0.1){
+              opacity = 1.0
+            }
+            this.setState({
+              opacity
+            })
+          },100)
+        }
+        render(){
+          return (
+            <div style={{opacity:this.state.opacity}}>
+              Hello {this.props.name}
+            </div>
+          )
+        }
+      }
+      ReactDOM.render(
+        <Hello name="world" />,
+        document.getElementById('root')
+      )
+    </script>
+  </body>
+</html>

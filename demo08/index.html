@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>state</title>
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+  </head>
+  <body>
+    <!-- state:状态，有交互就有state 
+    读取state：this.state.[stateKey]
+    设置state：this.setState({key:value})
+
+    所以props和state的区别就是：props表示那些一旦定义，就不再改变的特性，而 this.state 是会随着用户互动而产生变化的特性。
+    -->
+    <div id="root"></div>
+    <script type="text/babel">
+      class LikeButton extends React.Component{
+        constructor(){
+          super()
+          this.state = {
+            liked:false
+          }
+          this.handlerClick = this.handlerClick.bind(this)
+        }
+        handlerClick(){
+          this.setState({liked:!this.state.liked})
+        }
+        render(){
+          var text = this.state.liked ? '不喜欢' : '喜欢'
+          return (
+            <p onClick={this.handlerClick}>
+              你 {text} 游魂，点击切换。
+            </p>
+          )
+        }
+
+      }
+      ReactDOM.render(
+        <LikeButton />,
+        document.getElementById('root')
+      )
+    </script>
+  </body>
+</html>

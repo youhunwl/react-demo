@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>props的验证</title>
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+    <!-- 引入官方验证库 -->
+    <script src="../build/prop-types.js"></script>
+  </head>
+  <body>
+    <!-- 组件的属性可以接受任意值，字符串、对象、函数等等都可以。有时，我们需要一种机制，验证别人使用组件时，提供的参数是否符合要求。 
+
+    也可以使用 defaultProps 为props 定义默认值
+    -->
+    <div id="root"></div>
+    <script type="text/babel">
+      var data = '123'
+      class MyTitle extends React.Component{
+        static propTypes = {
+          title:PropTypes.string.isRequired,
+        }
+        render(){
+          return <h1>{this.props.title}</h1>
+        }
+      }
+      // 设置props默认值
+      MyTitle.defaultProps = {
+        title:'游魂'
+      }
+      ReactDOM.render(
+        <MyTitle/>,
+        document.getElementById('root')
+      )
+    </script>
+  </body>
+</html>

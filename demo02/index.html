@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JSX 的基本语法规则</title>
+  <script src="../build/react.development.js"></script>
+  <script src="../build/react-dom.development.js"></script>
+  <script src="../build/babel.min.js"></script>
+</head>
+
+<body>
+  <!-- JSX 的基本语法规则：遇到 HTML 标签（以 < 开头），就用 HTML 规则解析；遇到代码块（以 { 开头），就用 JavaScript 规则解析 -->
+  <div id="root"></div>
+  <script type="text/babel">
+    var names = ['小白','小黑','小红']
+    ReactDOM.render(
+      <div>
+        {
+          names.map(function(name,index){
+            return <div key={index}>Hello,{name}!</div>
+          })
+        }
+      </div>,
+      document.getElementById('root')
+    )
+  </script>
+</body>
+
+</html>

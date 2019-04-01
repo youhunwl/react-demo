@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>网络请求</title>
+    <script src="../build/react.development.js"></script>
+    <script src="../build/react-dom.development.js"></script>
+    <script src="../build/babel.min.js"></script>
+    <script src="../build/jquery.min.js"></script>
+  </head>
+  <body>
+    <!-- React和Vue一样本身没有任何依赖，完全可以不用Jquery，而使用其他库，例如axios等 -->
+    <div id="root"></div>
+    <script type="text/babel">
+      class Forecast extends React.Component{
+        constructor(props){
+          super(props)
+          this.state = {
+            wendu:'',
+            ganmao:''
+          }
+        }
+        componentDidMount(){
+          $.get(this.props.source,(result)=>{
+            let data = result.data
+            console.log(data)
+            this.setState({
+              wendu:data.wendu,
+              ganmao:data.ganmao
+            })
+          })
+        }
+        render(){
+          return(
+            <div>
+              北京现在温度:{this.state.wendu}°<br/>
+              提醒：{this.state.ganmao}
+            </div>
+          )
+        }
+      }
+      ReactDOM.render(
+        <Forecast source="https://www.apiopen.top/weatherApi?city=北京"/>,
+        document.getElementById('root')
+      )
+    </script>
+  </body>
+</html>
